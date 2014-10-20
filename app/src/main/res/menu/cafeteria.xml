@@ -7,4 +7,16 @@
         android:orderInCategory="1"
         android:showAsAction="never" />
 
+    <item android:id="@+id/cafeteria_facebook"
+        android:title="@string/cafeteria_facebook"
+        android:orderInCategory="2"
+        android:showAsAction="never" />
+
+    <item android:id="@+id/cafeteria_update"
+        android:title="@string/cafeteria_update"
+        android:icon="@drawable/ic_action_refresh"
+        android:orderInCategory="1"
+        android:onClick="updateDinnerList"
+        android:showAsAction="ifRoom" />
+
 </menu>

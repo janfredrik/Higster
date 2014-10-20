@@ -1,6 +1,8 @@
 package no.clap.higger;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +13,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,18 +61,28 @@ public class CafeteriaActivity extends FragmentActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.cafeteria_contact) {
-            contact();
+            SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                    .setTitle(R.string.cafeteria_contact_title).setMessage(R.string.cafeteria_contact_info)
+                    .show();
+            return true;
+        }
+        if (id == R.id.cafeteria_facebook) {
+            String uri = "fb://page/153122051413387";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Show the contact fragment with text from the string files.
-    public void contact() {
-        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
-                .setTitle(R.string.cafeteria_contact_title).setMessage(R.string.cafeteria_contact_info)
-                .show();
+
+    public void updateDinnerList(MenuItem item) {
+        list.invalidateViews();                 // Clear List items and
+        oslist.clear();                         // the ArrayList
+        new JSONParse().execute();
+        Toast.makeText(getApplicationContext(), "Dinner list updated!", Toast.LENGTH_SHORT).show();
     }
+
 
 
     // Below: JSONparsing and ListView initialization for the external dinnerlist JSON-file
