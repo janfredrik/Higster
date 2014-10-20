@@ -1,0 +1,17 @@
+{ "dinner" : [ 
+	  { "day" : "Monday",
+        "food" : "Lammegryte Provencale"
+      },
+	  { "day" : "Tuesday",
+        "food" : "Tacotallerken"
+      },
+	  { "day" : "Wednesday",
+        "food" : "Thaiinspirert kyllingbryst m/ris"
+      },
+	  { "day" : "Thursday",
+        "food" : "Rømmegrøt m/spekemat"
+      },
+	  { "day" : "Friday",
+        "food" : "Kokkens varmlunsj"
+      }
+    ] }

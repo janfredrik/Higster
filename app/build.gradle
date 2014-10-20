@@ -21,4 +21,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'eu.inmite.android.lib:android-styled-dialogs:1.2.0'
+
 }

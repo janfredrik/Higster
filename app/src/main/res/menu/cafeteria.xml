@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="no.clap.higger.CafeteriaActivity" >
+
+    <item android:id="@+id/cafeteria_contact"
+        android:title="@string/cafeteria_contact"
+        android:orderInCategory="1"
+        android:showAsAction="never" />
+
+</menu>

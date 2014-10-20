@@ -1,9 +1,11 @@
 package no.clap.higger;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainActivity extends Activity {
@@ -33,4 +35,10 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void startCafeteriaActivity(View v) {
+        Intent intent = new Intent(this, CafeteriaActivity.class);
+        startActivity(intent);
+    }
+
 }
