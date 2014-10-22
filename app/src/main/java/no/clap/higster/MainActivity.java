@@ -41,4 +41,9 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void startMapsActivity(View v){
+        Intent map = new Intent(this, MapsActivity.class);
+        startActivity(map);
+    }
+
 }
