@@ -1,5 +1,8 @@
 package no.clap.higster;
 
+import android.app.ActionBar;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,6 +42,7 @@ public class CafeteriaActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpTabs();
         setContentView(R.layout.activity_cafeteria);
 
         new JSONParse().execute();                              // Get the JSON with dinner list
@@ -79,6 +83,50 @@ public class CafeteriaActivity extends FragmentActivity {
         oslist.clear();                         // the ArrayList
         new JSONParse().execute();
         Toast.makeText(getApplicationContext(), "Dinner list updated!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setUpTabs() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ActionBar.Tab mainTab = actionBar.newTab().setText("Middagsliste").setTabListener(new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+            //    Toast.makeText(getApplicationContext(), "Hei", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+        });
+
+        actionBar.addTab(mainTab);
+
+        ActionBar.Tab priceTab = actionBar.newTab().setText("Priser").setTabListener(new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().show().commit();
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+            }
+        });
+
+        actionBar.addTab(priceTab);
     }
 
 
