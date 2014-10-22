@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="no.clap.higger.CafeteriaActivity" >
+    tools:context="no.clap.higster.CafeteriaActivity" >
 
     <item android:id="@+id/cafeteria_contact"
         android:title="@string/cafeteria_contact"

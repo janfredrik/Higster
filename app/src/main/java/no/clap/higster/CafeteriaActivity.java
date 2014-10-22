@@ -1,4 +1,4 @@
-package no.clap.higger;
+package no.clap.higster;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListAdapter;
@@ -94,7 +93,7 @@ public class CafeteriaActivity extends FragmentActivity {
             day = (TextView)findViewById(R.id.day);
             food = (TextView)findViewById(R.id.food);
             pDialog = new ProgressDialog(CafeteriaActivity.this);
-            pDialog.setMessage("@string/getting_data");
+            pDialog.setMessage(CafeteriaActivity.this.getString(R.string.getting_data));
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();

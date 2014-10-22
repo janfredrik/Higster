@@ -1,4 +1,4 @@
-package no.clap.higger;
+package no.clap.higster;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
