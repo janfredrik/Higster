@@ -1,4 +1,4 @@
-Higster
+Unnamed HiG Project
 ===================
 
 Project in the Mobile Dev course at HiG
