@@ -25,6 +25,9 @@ import java.util.HashMap;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
+import no.clap.higster.R;
+import android.R;
+
 
 public class CafeteriaActivity extends FragmentActivity {
     ListView list;
@@ -111,8 +114,6 @@ public class CafeteriaActivity extends FragmentActivity {
         ActionBar.Tab priceTab = actionBar.newTab().setText("Priser").setTabListener(new ActionBar.TabListener() {
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                FragmentManager fm = getFragmentManager();
-                fm.beginTransaction().show().commit();
             }
 
             @Override
