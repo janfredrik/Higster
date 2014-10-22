@@ -9,9 +9,11 @@
     <string name="maps">Maps</string>
     <string name="checkins">Check in</string>
     <string name="timeedit">Schedule</string>
+    <string name="getting_data">Getting data ...</string>
     <string name="cafeteria_contact">Contact</string>
     <string name="cafeteria_update">Update</string>
     <string name="cafeteria_facebook">Like on Facebook</string>
+    <string name="cafeteria_current_week">Dinner menu this week:</string>
     <string name="cafeteria_contact_title">SOPP Cafeteria Gjøvik</string>
     <string name="cafeteria_desc">The Student cafeterias are a natural meeting place for students at campus.
        \n\nWe can offer you a varied menu, which includes vegetarian food. Menus are designed keeping in mind that most students live on a tight budget. </string>

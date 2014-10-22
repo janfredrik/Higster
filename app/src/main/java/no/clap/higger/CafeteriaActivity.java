@@ -42,8 +42,7 @@ public class CafeteriaActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cafeteria);
 
-        new JSONParse().execute();
-
+        new JSONParse().execute();                              // Get the JSON with dinner list
     }
 
 
@@ -95,7 +94,7 @@ public class CafeteriaActivity extends FragmentActivity {
             day = (TextView)findViewById(R.id.day);
             food = (TextView)findViewById(R.id.food);
             pDialog = new ProgressDialog(CafeteriaActivity.this);
-            pDialog.setMessage("Getting Data ...");
+            pDialog.setMessage("@string/getting_data");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
