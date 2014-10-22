@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Higster</string>
+    <string name="app_name">Higster2k</string>
     <string name="title_activity_cafeteria">SOPP Cafeteria</string>
     <string name="hello_world">This is the main screen with links to maps, check ins, lunch menu and timeedit</string>
     <string name="action_settings">Settings</string>
