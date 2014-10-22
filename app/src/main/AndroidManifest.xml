@@ -27,6 +27,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="no.clap.higger.MainActivity" />
         </activity>
 
         <meta-data

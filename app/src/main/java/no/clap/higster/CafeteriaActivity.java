@@ -1,4 +1,5 @@
 package no.clap.higster;
+import no.clap.higster.R;
 
 import android.app.ActionBar;
 import android.app.FragmentManager;
@@ -17,6 +18,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,8 +28,7 @@ import java.util.HashMap;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
-import no.clap.higster.R;
-import android.R;
+
 
 
 public class CafeteriaActivity extends FragmentActivity {
@@ -45,9 +47,19 @@ public class CafeteriaActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUpTabs();
-        setContentView(R.layout.activity_cafeteria);
+         setUpTabs();
 
+         setContentView(R.layout.activity_cafeteria);
+
+     /*   FadingActionBarHelper helper = new FadingActionBarHelper()
+                .actionBarBackground(R.drawable.cafe_actionbar_bg)
+                .headerLayout(R.layout.header)
+                .contentLayout(R.layout.activity_cafeteria);
+
+        setContentView(helper.createView(this));
+        helper.initActionBar(this);
+
+*/
         new JSONParse().execute();                              // Get the JSON with dinner list
     }
 

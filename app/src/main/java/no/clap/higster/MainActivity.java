@@ -1,4 +1,5 @@
 package no.clap.higster;
+import no.clap.higster.R;
 
 import android.app.Activity;
 import android.content.Intent;
