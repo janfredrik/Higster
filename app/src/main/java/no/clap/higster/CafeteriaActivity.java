@@ -2,10 +2,13 @@ package no.clap.higster;
 import no.clap.higster.R;
 
 import android.app.ActionBar;
-import android.app.FragmentManager;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,8 +21,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.manuelpeinado.fadingactionbar.FadingActionBarHelper;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,39 +29,35 @@ import java.util.HashMap;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
-
-
-
 public class CafeteriaActivity extends FragmentActivity {
+    // Dinner list
     ListView list;
     TextView day;
     TextView food;
     ArrayList<HashMap<String, String>> oslist = new ArrayList<HashMap<String, String>>();
-    //URL to get JSON Array
     private static String url = "http://www.stud.hig.no/~120217/higger/middag.json";
-    //JSON Node names
+    // JSON Node names
     private static final String TAG_DINNER = "dinner";
     private static final String TAG_DAY = "day";
     private static final String TAG_FOOD = "food";
     JSONArray android = null;
 
+    // Tabs
+    public static Context appContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         setUpTabs();
+        setContentView(R.layout.activity_cafeteria);
+        setUpTabs();
+        appContext = getApplicationContext();
 
-         setContentView(R.layout.activity_cafeteria);
-
-     /*   FadingActionBarHelper helper = new FadingActionBarHelper()
-                .actionBarBackground(R.drawable.cafe_actionbar_bg)
-                .headerLayout(R.layout.header)
-                .contentLayout(R.layout.activity_cafeteria);
-
-        setContentView(helper.createView(this));
-        helper.initActionBar(this);
-
-*/
-        new JSONParse().execute();                              // Get the JSON with dinner list
+        if (haveNetworkConnection()) {                              // Check for network connection
+            new JSONParse().execute();                              // Get the JSON with dinner list
+        }
+        else {
+            Toast.makeText(appContext, "Cannot fetch dinner list", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -104,47 +101,67 @@ public class CafeteriaActivity extends FragmentActivity {
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        ActionBar.Tab mainTab = actionBar.newTab().setText("Middagsliste").setTabListener(new ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-            //    Toast.makeText(getApplicationContext(), "Hei", Toast.LENGTH_SHORT).show();
-            }
+        ActionBar.Tab DinnerTab = actionBar.newTab().setText("Middagsliste");
+        ActionBar.Tab PriceTab = actionBar.newTab().setText("Prisliste");
 
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        Fragment DinnerFragment= new DinnerFragment();
+        Fragment PriceFragment = new PriceFragment();
 
-            }
+        DinnerTab.setTabListener(new MyTabsListener(DinnerFragment));
+        PriceTab.setTabListener(new MyTabsListener(PriceFragment));
 
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        actionBar.addTab(DinnerTab);
+        actionBar.addTab(PriceTab);
+    }
 
-            }
-        });
+    // Tabs
 
-        actionBar.addTab(mainTab);
+    class MyTabsListener implements ActionBar.TabListener {
+        public Fragment fragment;
 
-        ActionBar.Tab priceTab = actionBar.newTab().setText("Priser").setTabListener(new ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-            }
+        public MyTabsListener(Fragment fragment) {
+            this.fragment = fragment;
+        }
 
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        @Override
+        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            Toast.makeText(CafeteriaActivity.appContext, "Reselected!", Toast.LENGTH_LONG).show();
+        }
 
-            }
+        @Override
+        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+            ft.replace(R.id.fragment_container, fragment);
+        }
 
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        @Override
+        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            ft.remove(fragment);
+        }
 
-            }
-        });
+    }
 
-        actionBar.addTab(priceTab);
+    // Have network?
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
 
-
     // Below: JSONparsing and ListView initialization for the external dinnerlist JSON-file
+
+
 
     private class JSONParse extends AsyncTask<String, String, JSONObject> {
         private ProgressDialog pDialog;
