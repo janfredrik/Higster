@@ -29,6 +29,11 @@ import java.util.HashMap;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseInstallation;
+import com.parse.PushService;
+
 public class CafeteriaActivity extends FragmentActivity {
     // Dinner list
     ListView list;

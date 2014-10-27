@@ -8,6 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseInstallation;
+import com.parse.PushService;
+
 
 public class MainActivity extends Activity {
 
@@ -15,6 +20,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Parse.initialize(this, "LLbpoz4GE3wrTZJPsQwRp9C3AgxRsW8uki0QqubJ", "WQOR89pmKgjZF3m0fH0t3rQbASrPmbNuvTvNZs0b");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 
 

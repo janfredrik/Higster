@@ -1,15 +1,15 @@
 { "dinner" : [ 
 	  { "day" : "Monday",
-        "food" : "Lammegryte Provencale"
+        "food" : "Helstekt svinenakke m/grønnsaker, fiskeboller m/reker"
       },
 	  { "day" : "Tuesday",
-        "food" : "Tacotallerken"
+        "food" : "Hønsefrikasse på tradisjonelt vis, lettsaltet torsk"
       },
 	  { "day" : "Wednesday",
-        "food" : "Thaiinspirert kyllingbryst m/ris"
+        "food" : "Oksekarbonader m/fløtepoteter, fersk uerfilet"
       },
 	  { "day" : "Thursday",
-        "food" : "Rømmegrøt m/spekemat"
+        "food" : "Grillskiver av svinekam, fylt rødspette m/råkost"
       },
 	  { "day" : "Friday",
         "food" : "Kokkens varmlunsj"

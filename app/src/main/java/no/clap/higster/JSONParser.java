@@ -1,6 +1,7 @@
 // http://www.learn2crack.com/2013/11/listview-from-json-example.html
 //
 package no.clap.higster;
+import no.clap.higster.R;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

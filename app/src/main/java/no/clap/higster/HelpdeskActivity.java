@@ -1,4 +1,5 @@
 package no.clap.higster;
+import no.clap.higster.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,19 +9,18 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import no.clap.higster.R;
 
 public class HelpdeskActivity extends Activity {
 
-    WebView webview = new WebView(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(webview);
+
+        WebView webview = new WebView(this);
+        setContentView(webview);
+        webview.setWebViewClient(new Callback());
         webview.loadUrl("http://hig.no/it_tjenesten/rettleiingar/");
-
-
     }
 
 
@@ -43,5 +43,13 @@ public class HelpdeskActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class Callback extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return (false);
+        }
     }
 }

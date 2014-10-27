@@ -1,5 +1,6 @@
 package no.clap.higster;
 
+import no.clap.higster.R;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 

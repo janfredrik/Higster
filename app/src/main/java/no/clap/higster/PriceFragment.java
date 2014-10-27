@@ -1,5 +1,6 @@
 package no.clap.higster;
 
+import no.clap.higster.R;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
