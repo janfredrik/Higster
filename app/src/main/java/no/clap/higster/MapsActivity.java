@@ -1,5 +1,4 @@
 package no.clap.higster;
-import no.clap.higster.R;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -64,7 +63,6 @@ public class MapsActivity extends FragmentActivity {
     private void setUpMap() {
         LatLng hig = new LatLng(60.789017,10.682142);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hig, 15));
-
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(60.789017,10.682142)).title("Higga plz"));
     }
 }
