@@ -8,6 +8,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
@@ -19,7 +20,8 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-        mMap.setMyLocationEnabled(true);                    // Shows current position
+        mMap.setMyLocationEnabled(true);  // Shows current position
+
     }
 
     @Override
@@ -60,11 +62,16 @@ public class MapsActivity extends FragmentActivity {
         LatLng hig = new LatLng(60.789237,10.681779);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hig,17));
 
-        mMap.addMarker(new MarkerOptions().position(new LatLng(60.790107,10.683389)).title("A-building"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(60.790332,10.682455)).title("K-building"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(60.78973, 10.682412)).title("G-building"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(60.789515,10.680749)).title("B-building"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(60.788447,10.680749)).title("H-building"));
+        Marker abuilding = mMap.addMarker(new MarkerOptions().position(new LatLng(60.790107,10.683389)).title("A-building"));
+        Marker kbuilding = mMap.addMarker(new MarkerOptions().position(new LatLng(60.790332,10.682455)).title("K-building"));
+        Marker gbuilding = mMap.addMarker(new MarkerOptions().position(new LatLng(60.78973, 10.682412)).title("G-building"));
+        Marker bbuilding = mMap.addMarker(new MarkerOptions().position(new LatLng(60.789515,10.680749)).title("B-building"));
+        Marker hbuilding = mMap.addMarker(new MarkerOptions().position(new LatLng(60.788447,10.680749)).title("H-building"));
 
+        abuilding.showInfoWindow();
+        kbuilding.showInfoWindow();
+        gbuilding.showInfoWindow();
+        bbuilding.showInfoWindow();
+        hbuilding.showInfoWindow();
     }
 }
