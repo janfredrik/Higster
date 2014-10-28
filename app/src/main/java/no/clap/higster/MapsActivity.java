@@ -62,8 +62,14 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        LatLng hig = new LatLng(60.789017,10.682142);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hig, 15));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(60.789017,10.682142)).title("Higga plz"));
+        LatLng hig = new LatLng(60.789237,10.681779);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hig,17));
+
+        mMap.addMarker(new MarkerOptions().position(new LatLng(60.790107,10.683389)).title("A-building"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(60.790332,10.682455)).title("K-building"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(60.78973, 10.682412)).title("G-building"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(60.789515,10.680749)).title("B-building"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(60.788447,10.680749)).title("H-building"));
+
     }
 }
