@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 
 
-
 public class DinnerFragment extends Fragment {
 
     @Override

@@ -1,5 +1,4 @@
 package no.clap.higster;
-import no.clap.higster.R;
 
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -29,40 +28,24 @@ import java.util.HashMap;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseInstallation;
-import com.parse.PushService;
-
 public class CafeteriaActivity extends FragmentActivity {
     // Dinner list
     ListView list;
     TextView day;
     TextView food;
-    ArrayList<HashMap<String, String>> oslist = new ArrayList<HashMap<String, String>>();
+    ArrayList<HashMap<String, String>> dinnerlist = new ArrayList<HashMap<String, String>>();
     private static String url = "http://www.stud.hig.no/~120217/higger/middag.json";
     // JSON Node names
     private static final String TAG_DINNER = "dinner";
     private static final String TAG_DAY = "day";
     private static final String TAG_FOOD = "food";
-    JSONArray android = null;
-
-    // Tabs
-    public static Context appContext;
+    JSONArray dinnerjson = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cafeteria);
         setUpTabs();
-        appContext = getApplicationContext();
-
-        if (haveNetworkConnection()) {                              // Check for network connection
-            new JSONParse().execute();                              // Get the JSON with dinner list
-        }
-        else {
-            Toast.makeText(appContext, "Cannot fetch dinner list", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
@@ -75,9 +58,6 @@ public class CafeteriaActivity extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.cafeteria_contact) {
             SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
@@ -96,8 +76,8 @@ public class CafeteriaActivity extends FragmentActivity {
 
 
     public void updateDinnerList(MenuItem item) {
-        list.invalidateViews();                 // Clear List items and
-        oslist.clear();                         // the ArrayList
+        list.invalidateViews();                     // Clear List items and
+        dinnerlist.clear();                         // the ArrayList
         new JSONParse().execute();
         Toast.makeText(getApplicationContext(), "Dinner list updated!", Toast.LENGTH_SHORT).show();
     }
@@ -109,11 +89,49 @@ public class CafeteriaActivity extends FragmentActivity {
         ActionBar.Tab DinnerTab = actionBar.newTab().setText("Middagsliste");
         ActionBar.Tab PriceTab = actionBar.newTab().setText("Prisliste");
 
-        Fragment DinnerFragment= new DinnerFragment();
-        Fragment PriceFragment = new PriceFragment();
+        final Fragment DinnerFragment = new DinnerFragment();
+        final Fragment PriceFragment = new PriceFragment();
 
-        DinnerTab.setTabListener(new MyTabsListener(DinnerFragment));
-        PriceTab.setTabListener(new MyTabsListener(PriceFragment));
+        DinnerTab.setTabListener(new ActionBar.TabListener() {
+                 @Override
+                 public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                     ft.replace(R.id.fragment_container, DinnerFragment);
+                     if (haveNetworkConnection()) {                              // Check for network connection
+                         new JSONParse().execute();                              // Get the JSON with dinner list
+                     }
+                     else {
+                         Toast.makeText(getApplicationContext(), "Cannot fetch dinner list", Toast.LENGTH_SHORT).show();
+                     }
+                 }
+
+                 @Override
+                 public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                     list.invalidateViews();                    // Clear List items and
+                     dinnerlist.clear();                         // the ArrayList
+                     ft.remove(DinnerFragment);
+                 }
+
+                 @Override
+                 public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+                 }
+             });
+        PriceTab.setTabListener(new ActionBar.TabListener() {
+                @Override
+                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                    ft.replace(R.id.fragment_container, PriceFragment);
+                }
+
+                @Override
+                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                    ft.remove(PriceFragment);
+                }
+
+                @Override
+                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+                }
+            });
 
         actionBar.addTab(DinnerTab);
         actionBar.addTab(PriceTab);
@@ -130,7 +148,6 @@ public class CafeteriaActivity extends FragmentActivity {
 
         @Override
         public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-            Toast.makeText(CafeteriaActivity.appContext, "Reselected!", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -193,9 +210,9 @@ public class CafeteriaActivity extends FragmentActivity {
             pDialog.dismiss();
             try {
                 // Getting JSON Array from URL
-                android = json.getJSONArray(TAG_DINNER);
-                for(int i = 0; i < android.length(); i++){
-                    JSONObject c = android.getJSONObject(i);
+                dinnerjson = json.getJSONArray(TAG_DINNER);
+                for(int i = 0; i < dinnerjson.length(); i++){
+                    JSONObject c = dinnerjson.getJSONObject(i);
                     // Storing JSON item in a Variable
                     String day = c.getString(TAG_DAY);
                     String food = c.getString(TAG_FOOD);
@@ -203,9 +220,9 @@ public class CafeteriaActivity extends FragmentActivity {
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put(TAG_DAY, day);
                     map.put(TAG_FOOD, food);
-                    oslist.add(map);
+                    dinnerlist.add(map);
                     list=(ListView)findViewById(R.id.dinnerList);
-                    ListAdapter adapter = new SimpleAdapter(CafeteriaActivity.this, oslist,
+                    ListAdapter adapter = new SimpleAdapter(CafeteriaActivity.this, dinnerlist,
                             R.layout.list_v,
                             new String[] { TAG_DAY, TAG_FOOD }, new int[] {
                     R.id.day, R.id.food});
