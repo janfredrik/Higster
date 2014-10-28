@@ -20,6 +20,6 @@
     <string name="cafeteria_contact_info">Phone: +47 612 87 427\nE-mail: berit.grina.wold@sopp.no</string>
     <string name="cafeteria_opening">08.00 - 17.00 (Mon-Thu), 08.00 - 15.00 (Fri)</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_helpdesk">HelpdeskActivity</string>
+    <string name="title_activity_helpdesk">Helpdesk</string>
 
 </resources>

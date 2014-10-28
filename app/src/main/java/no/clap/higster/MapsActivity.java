@@ -19,6 +19,7 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        mMap.setMyLocationEnabled(true);                    // Shows current position
     }
 
     @Override
@@ -55,12 +56,6 @@ public class MapsActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
     private void setUpMap() {
         LatLng hig = new LatLng(60.789237,10.681779);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hig,17));
